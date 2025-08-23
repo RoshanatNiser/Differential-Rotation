@@ -1,1 +1,25 @@
+# Solar Differential Rotation Analysis Pipeline - Python Dependencies
 
+# Core scientific computing
+numpy>=1.20.0
+matplotlib>=3.3.0
+scipy>=1.6.0
+pandas>=1.2.0
+
+# Astronomy and solar physics
+astropy>=4.2.0
+sunpy>=3.0.0
+
+# Image processing
+opencv-python>=4.5.0
+scikit-image>=0.18.0
+Pillow>=8.0.0
+
+# Optional dependencies for enhanced functionality
+# Install with: pip install -r requirements.txt
+# For data download: pip install sunpy[net]
+
+# Development dependencies (optional)
+pytest>=6.0.0
+jupyter>=1.0.0
+ipykernel>=6.0.0
