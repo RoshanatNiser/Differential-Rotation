@@ -1,1 +1,93 @@
-
+{
+  "description": "Sample configuration for Solar Differential Rotation Analysis Pipeline",
+  "version": "1.0",
+  
+  "data_sources": {
+    "local_files": {
+      "image_directory": "./sample_images",
+      "file_pattern": "*.fits",
+      "time_from_filename": false,
+      "filename_time_format": "%Y%m%d_%H%M%S"
+    },
+    "download": {
+      "enabled": false,
+      "instrument": "HMI",
+      "data_type": "continuum",
+      "start_time": "2023-10-15T00:00:00",
+      "end_time": "2023-10-22T00:00:00",
+      "cadence": "12h"
+    }
+  },
+  
+  "preprocessing": {
+    "image_standardization": {
+      "normalize": true,
+      "target_size": null,
+      "remove_outliers": true
+    },
+    "coordinate_system": {
+      "use_sunpy_maps": true,
+      "manual_plate_scale": null,
+      "manual_solar_center": null
+    }
+  },
+  
+  "detection": {
+    "disk_method": "hough",
+    "min_sunspot_area": 15,
+    "intensity_threshold": null,
+    "limb_darkening_correction": true,
+    
+    "edge_detection_sigma": 1.0,
+    "hough_params": {
+      "param1": 50,
+      "param2": 30,
+      "min_radius_fraction": 0.3,
+      "max_radius_fraction": 0.6
+    },
+    
+    "intensity_threshold_sigma": 2.0,
+    "morphology_operations": {
+      "remove_small_objects": true,
+      "fill_holes": true
+    }
+  },
+  
+  "tracking": {
+    "max_distance_deg": 15.0,
+    "max_time_days": 5.0,
+    "min_track_length": 2
+  },
+  
+  "analysis": {
+    "fit_differential_rotation": true,
+    "export_results": true,
+    "create_plots": true,
+    "exclude_high_latitude": 60.0,
+    "minimum_tracks_for_fit": 3
+  },
+  
+  "output": {
+    "results_dir": "solar_analysis_results",
+    "save_intermediate": true,
+    "plot_format": "png",
+    "create_summary_plots": true,
+    "create_animation": false,
+    "plot_individual_detections": true,
+    "plot_tracking_results": true,
+    "data_format": "csv",
+    "export_json": true
+  },
+  
+  "quality_control": {
+    "image_quality": {
+      "min_snr": 10.0,
+      "min_contrast": 0.1,
+      "min_quality_score": 0.3
+    },
+    "detection_quality": {
+      "max_sunspot_size": 1000,
+      "min_detection_completeness": 0.5
+    }
+  }
+}
